@@ -33,12 +33,12 @@ func PopulateKeystoreFromCertServer(
 
 	keysResponse, err := client.Do(keysRequest)
 
-	if nil != keysResponse.Body {
-		defer keysResponse.Body.Close()
-	}
-
 	if nil != err {
 		return err
+	}
+
+	if nil != keysResponse.Body {
+		defer keysResponse.Body.Close()
 	}
 
 	keysBytes, err := ioutil.ReadAll(keysResponse.Body)
