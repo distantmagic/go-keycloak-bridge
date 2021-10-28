@@ -6,14 +6,10 @@ import (
 	"golang.org/x/oauth2"
 )
 
-func UnmarshalToken(marshaledToken interface{}) (*oauth2.Token, error) {
-	if marshaledToken == nil {
-		return nil, nil
-	}
-
+func UnmarshalToken(marshaledToken []byte) (*oauth2.Token, error) {
 	token := new(oauth2.Token)
 
-	err := json.Unmarshal(marshaledToken.([]byte), token)
+	err := json.Unmarshal(marshaledToken, token)
 
 	if nil != err {
 		return nil, err
